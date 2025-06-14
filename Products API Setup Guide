@@ -1,0 +1,155 @@
+# Express.js Products API Setup Guide
+
+## Prerequisites
+- Node.js (version 14 or higher)
+- npm (comes with Node.js)
+
+## Setup Instructions
+
+### 1. Initialize the Project
+```bash
+# Create a new directory for your project
+mkdir express-products-api
+cd express-products-api
+
+# Initialize npm (this creates package.json)
+npm init -y
+```
+
+### 2. Install Dependencies
+```bash
+# Install required dependencies
+npm install express body-parser uuid
+
+# Install development dependencies (optional but recommended)
+npm install --save-dev nodemon
+```
+
+
+###  Start the Server
+```bash
+# For development (with auto-restart on changes)
+npm run dev
+
+# Or for production
+npm start
+```
+
+The server will start on `http://localhost:3000`
+
+## API Endpoints
+
+### Base URL: `http://localhost:3000`
+
+### 1. Root Endpoint
+- **GET** `/`
+- Returns welcome message and available endpoints
+
+### 2. Products Endpoints
+
+#### Get All Products
+- **GET** `/api/products`
+- Returns all products with count
+
+#### Get Single Product
+- **GET** `/api/products/:id`
+- Returns a specific product by ID
+
+#### Create New Product
+- **POST** `/api/products`
+- Creates a new product
+- **Request Body:**
+```json
+{
+  "name": "Product Name",
+  "description": "Product description",
+  "price": 29.99,
+  "category": "Category Name",
+  "inStock": true
+}
+```
+
+#### Update Product
+- **PUT** `/api/products/:id`
+- Updates an existing product
+- **Request Body:** Same as POST
+
+#### Delete Product
+- **DELETE** `/api/products/:id`
+- Deletes a product by ID
+
+## Testing the API
+
+### Using curl
+
+#### Get all products:
+```bash
+curl http://localhost:3000/api/products
+```
+
+#### Get a specific product:
+```bash
+curl http://localhost:3000/api/products/1
+```
+
+#### Create a new product:
+```bash
+curl -X POST http://localhost:3000/api/products \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Smartphone",
+    "description": "Latest model smartphone",
+    "price": 699.99,
+    "category": "Electronics",
+    "inStock": true
+  }'
+```
+
+#### Update a product:
+```bash
+curl -X PUT http://localhost:3000/api/products/1 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Gaming Laptop",
+    "description": "High-end gaming laptop",
+    "price": 1299.99,
+    "category": "Electronics",
+    "inStock": true
+  }'
+```
+
+#### Delete a product:
+```bash
+curl -X DELETE http://localhost:3000/api/products/1
+```
+
+### Using Postman or Thunder Client (VS Code Extension)
+
+1. Import the following collection of requests:
+   - GET: `http://localhost:3000/api/products`
+   - GET: `http://localhost:3000/api/products/1`
+   - POST: `http://localhost:3000/api/products` (with JSON body)
+   - PUT: `http://localhost:3000/api/products/1` (with JSON body)
+   - DELETE: `http://localhost:3000/api/products/1`
+
+2. Set Content-Type header to `application/json` for POST and PUT requests
+
+## Features Included
+
+✅ **Express.js Setup**: Complete server setup with middleware
+✅ **RESTful Routes**: All CRUD operations implemented
+✅ **Data Validation**: Input validation with error messages
+✅ **Error Handling**: Proper error responses and status codes
+✅ **CORS Support**: Cross-origin requests enabled
+✅ **Sample Data**: Pre-populated with example products
+✅ **Consistent Response Format**: Standardized JSON responses
+✅ **404 Handling**: Proper handling of non-existent routes
+
+## Project Structure
+```
+express-products-api/
+├── package.json
+├── server.js
+└── node_modules/
+```
+
